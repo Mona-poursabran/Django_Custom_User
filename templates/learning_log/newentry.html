@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} New Entry{% endblock title %}
+
+{% block content %}
+
+    <h3 style="margin-top:80px ; color: rgb(73, 3, 3); font-weight: bold;"> 
+    {% comment %} <a href="#" class="link" style="color: rgb(138, 1, 1)" > {{topic.topic}}</a>   {% endcomment %}
+    </h3>
+    <form  method ="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button  name='submit' class="btn btn-info"> Add </button>  
+      {% comment %} <button  name='submit' class="btn btn-info"><a href="{% url 'topic_detail' %}"> Back </a> </button>         {% endcomment %}
+    </form>
+
+
+{% endblock content %}

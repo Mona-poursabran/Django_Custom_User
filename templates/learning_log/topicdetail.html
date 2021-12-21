@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Topic Info{% endblock title %}
+
+{% block content %}
+
+    <h3 style=" color: rgb(73, 3, 3); font-weight: bold;"> {{topic.topic}} </h3>
+    <ul> 
+        {% for entry in topic.entry.all %}
+            <p style="color: rgb(165, 34, 11);">DateTime:  {{entry.datetime_add|date:"Y_M_d H:i"}} </p>
+            <li> {{entry.entry|linebreaks}} </li>
+           <a href="{% url 'entry_update' entry.pk %}" > Edit Entry </a> |
+            <a href="{% url 'entry_delete' entry.pk %}" > Delete </a> 
+        {% empty %}
+            <li> There are no entry for this topic yet. </li>
+        {% endfor %}
+    </ul> 
+
+    <h5><a href="{% url 'new_entry' topic.pk %}"  class="link btn btn-info" > Add a new Entry </a></h5>
+    <h5><a href="{% url 'topic_list' %}" class="link btn btn-primary" > All Topics </a></h5>
+
+{% endblock content %}

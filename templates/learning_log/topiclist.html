@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Topics{% endblock title %}
+
+
+{% block content %}
+    <h1 > Topics </h1>
+        <ul>
+           
+            {% comment %} {% for topic in topics_list %}
+                <li> <a class="link" href="{% url 'topic_detail' topic.pk %}"> {{topic.topic}} </a></li>
+            {%  empty %}
+                <li> No topic has entered yet </li>       
+            {% endfor %} 
+        </ul>{% endcomment %}
+
+    <a href="{% url 'topic_new' %}" class="link" style="color:purple"> <p> Add a new Topic </a> </p> 
+
+    {% for topic in topics_list %}
+    <div class="card">
+    <div class="card-header">
+        <span class="font-weight-bold"><a href="{% url 'topic_detail' topic.pk %}"> {{ topic.topic }}</a></span> &middot;
+        <span class="text-muted">by {{ topic.owner }} |
+        {{ topic.datetime_add }}</span>
+    </div>
+    <div class="card-body">
+        <ul>
+        {% for entry in topic.entry.all %}
+            <li>{{entry}}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="card-footer text-center text-muted">
+    <a href="{% url 'topic_update' topic.pk %}">Edit</a> | <a href="{% url 'topic_delete' topic.pk %}">Delete</a>
+    </div>
+    </div>
+    <br />
+    {%  empty %}
+            <li> No topic has entered yet </li> 
+    {% endfor %}
+
+{% endblock content %}
+
+
